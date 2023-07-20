@@ -11,8 +11,9 @@ with open('account.csv', 'w') as f:
 
 # return to menu function
 def return_menu():
+    '''This will allow end user to return back to the menu.
+    Selections are limited to y (yes) or n (no)'''
     print('\nWould you like to return to menu?\n Please enter: (y/n)')
-    return_options = ['y','n']
     return_attempts = 3
     while return_attempts != 0:
         menu1 = str(input())
@@ -95,6 +96,8 @@ def main_menu():
 
 ### deposit function
 def user2():
+    '''This is the deposit function; this will be where the end user can input an int value (exclusively)
+    and be given a total balance as well as saved transactions'''
     print(f'\nHow much would you like to deposit today? Exact amounts only.')
     global account_balance
     attempts2 = 3
@@ -115,7 +118,7 @@ def user2():
 
     # needs to call on account balance and save values as input.
     new_balance_deb = deposit + account_balance
-    print(f'{new_balance_deb} is your new total balance.')
+    print(f'${new_balance_deb} is your new total balance.')
     # how deposits will be formated into account.csv (ledger)
     transaction_deb = {f'time':time.ctime(),
                         'type':'Debit', 'amount':(deposit)}
@@ -124,15 +127,17 @@ def user2():
     # actual push of transaction to ledger
     with open('account.csv', 'a') as f:
         writer = csv.DictWriter(f, fieldnames = columns)
-        #writer.writeheader()
         writer.writerow(transaction_deb)
     
     account_balance = new_balance_deb
     return_menu()
     return 
 
-# withdrawal function
+# withdrawal function this will give a negative amount to affect total balance
 def user3():
+    '''This is the withdrawal function; this will be where the end user can input an int value (exclusively)
+    and be given a total balance as well as saved transactions'''
+
     print(f'\nHow much would you like to withdrawal today? Exact amounts only.')
     global account_balance
     attempts3 = 3
@@ -152,7 +157,7 @@ def user3():
     
     # needs to call on account balance and save values as input.
     new_balance_cred = account_balance + withdrawal
-    print(f'{new_balance_cred} is your new total balance.')
+    print(f'${new_balance_cred} is your new total balance.')
 
     # how withdrawals will be formated into account.csv (ledger)
     transaction_cred = {f'time':time.ctime(),
@@ -171,7 +176,10 @@ def user3():
 
 # account balance check
 def user1():
-    print(f'\nYour current balance is: {account_balance}')
+    '''This is how the end user will check their current total balance, based on the ledger file associated.
+    Simply prints the variable account_balance.'''
+
+    print(f'\nYour current balance is: ${account_balance}')
     return_menu()
     return
 
@@ -213,9 +221,6 @@ def exiter():
 def balance_cvt(num):
     return int(num)
 
-#format of csv file
-columns = ['time','type','amount']
-
 #reading of csv file to extract existing rows
 with open('account.csv', 'r') as f:
     content = csv.DictReader(f, fieldnames=columns)
@@ -228,6 +233,6 @@ account_balance = 0
 for line in lines:
     account_balance = account_balance + balance_cvt(line['amount'])
 
-
+#activation of main menu loop
 main_menu()
 
