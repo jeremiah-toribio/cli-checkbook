@@ -9,12 +9,14 @@ def return_menu():
     return_attempts = 3
     while return_attempts != 0:
         menu1 = str(input())
-        if return_attempts == 0:
-            exiter()
-        elif menu1.lower() == 'y':
+        #if return_attempts == 0:
+            #exiter()
+        if menu1.lower() == 'y':
             return main_menu()
         elif menu1.lower() == 'n':
             exiter()
+        elif return_attempts == 0:
+            exit()
         else:
             print(f'Please type only y or n.\nYou have {return_attempts} attempt left before you are removed.')
             return_attempts -= 1
