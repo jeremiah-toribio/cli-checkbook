@@ -1,6 +1,13 @@
 # importing necessary libraries csv for data dump and time for logging
+
 import csv
 import time
+
+# initializes csv file
+columns = ['time','type','amount']
+with open('account.csv', 'w') as f:
+    writer = csv.DictWriter(f, fieldnames = columns)
+        
 
 # return to menu function
 def return_menu():
@@ -220,6 +227,7 @@ with open('account.csv', 'r') as f:
 account_balance = 0
 for line in lines:
     account_balance = account_balance + balance_cvt(line['amount'])
+
 
 main_menu()
 
