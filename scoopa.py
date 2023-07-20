@@ -17,8 +17,6 @@ def return_menu():
     return_attempts = 3
     while return_attempts != 0:
         menu1 = str(input())
-        #if return_attempts == 0:
-            #exiter()
         if menu1.lower() == 'y':
             return main_menu()
         elif menu1.lower() == 'n':
@@ -166,7 +164,6 @@ def user3():
     # actual push of transaction to ledger
     with open('account.csv', 'a') as f:
         writer = csv.DictWriter(f, fieldnames = columns)
-        #writer.writeheader()
         writer.writerow(transaction_cred)
     
 
